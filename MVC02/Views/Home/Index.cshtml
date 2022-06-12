@@ -1,5 +1,4 @@
-﻿
-<!-- TITULO DE PAGINA -->
+﻿<!-- TITULO DE PAGINA -->
 
 <div class="row mt-3">
     <div class="col-3"></div>
@@ -13,7 +12,100 @@
     <div class="col-3"></div>
 </div>
 
-<!-- GRILLA DE DATOS -->
+<!-- BOTÓN DE NUEVO -->
 <div class="row mt-3">
+    <div class="col-1"></div>
+    <div class="col-4">
+        <button type="button" class="btn btn-primary" onclick="tutorialesIns();">
+            <i class="bi-plus-square"></i> Añadir tutorial
+        </button>
+    </div>
+    <div class="col-7"></div>
+</div>
 
+<!-- GRILLA DE DATOS -->
+<div class="row mt-1">
+    <div class="col-1"></div>
+    <div class="col-10">
+        <table class="table table-striped table-hover table-bordered">
+            <thead class="table-primary">
+                <tr>
+                    <td>Titulo</td>
+                    <td>Precio</td>
+                    <td colspan="3">Tipo</td>
+                </tr>
+            </thead>
+
+            <tbody>
+                @foreach (var t in ViewBag.Lista)
+                {
+                    <tr>
+                        <td id="titulo_@t.idtutorial">@t.titulo</td>
+                        <td id="precio_@t.idtutorial" class="text-end">@t.precio</td>
+                        <td id="tipo_@t.idtutorial">@t.tipo</td>
+                        <td style="width:20px">
+                            <button type="button" class="btn btn-danger" onclick="tutorialesDel('@t.idtutorial')">
+                                <i class="bi-trash"></i>
+                            </button>
+                        </td>
+                        <td style="width:20px">
+                            <button type="button" class="btn btn-success" onclick="tutorialesUpd('@t.idtutorial')">
+                                <i class="bi-pencil"></i>
+                            </button>
+                        </td>
+                    </tr>
+
+                }
+            </tbody>
+        </table>
+    </div>
+    <div class="col-1"></div>
+</div>
+
+<!-- DIALOGO TUTORIALES -->
+
+<div id="dlg_tutoriales" class="modal fade show" aria-hidden="true" style="display: none;">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <form>
+                <div class="modal-header" style="background-color: #d3e9fa">
+                    <h5 id="dlg_tutoriales_title" class="modal-title">Nuevo Tutorial</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+
+                <div class="modal-body">
+                    <input type="hidden" id="tbl_tutoriales_accion" />
+                    <input type="hidden" id="tbl_tutoriales_idtutorial" />
+
+                    <div class="row">
+                        <div class="col-md-12">
+                            <label for="tbl_tutoriales_titulo">Título</label>
+                            <input type="text" class="form-control" id="tbl_tutoriales_titulo" placeholder="título de tutorial entre [10, 200] caracteres">
+                        </div>
+                    </div>
+
+                    <div class="row mt-3">
+                        <div class="col-md-12 col-lg-8">
+                            <label for="tbl_tutoriales_tipo">Tipo</label>
+                            <select class="form-select" id="tbl_tutoriales_tipo">
+                                <option value="Separata">Separata</option>
+                                <option value="Video">Video</option>
+                            </select>
+                        </div>
+                        <div class="col-md-12 col-lg-4">
+                            <label for="tbl_tutoriales_precio">Precio</label>
+                            <input type="text" class="form-control text-end" id="tbl_tutoriales_precio" placeholder="precio entre S/ [15, 1000]">
+                        </div>
+                    </div>
+
+                    <div id="dlg_tutoriales_errores" style="margin: 16px 30px;color: #900"></div>
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" onclick="tutorialesInsUpd();" style="width: 120px;margin-right: 12px">Guardar</button>
+                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal" style="width: 120px">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 </div>
