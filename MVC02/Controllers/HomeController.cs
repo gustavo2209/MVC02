@@ -25,10 +25,36 @@ namespace MVC02.Controllers
                 switch (accion)
                 {
                     case "INS":
+
+                        string titulo = Request["titulo"];
+                        string tipo = Request["tipo"];
+                        decimal precio = Convert.ToDecimal(Request["precio"]);
+
+                        tutoriales t = new tutoriales();
+                        t.titulo = titulo;
+                        t.tipo = tipo;
+                        t.precio = precio;
+
+                        daoTutoriales.tutorialesIns(t);
+
                         break;
                     case "UPD":
+                        int idtutorial = Convert.ToInt32(Request["idtutorial"]);
+                        titulo = Request["titulo"];
+                        tipo = Request["tipo"];
+                        precio = Convert.ToDecimal(Request["precio"]);
+
+                        t = new tutoriales();
+                        t.idtutorial = idtutorial;
+                        t.titulo = titulo;
+                        t.tipo = tipo;
+                        t.precio = precio;
+
+                        daoTutoriales.tutorialesUpd(t);
                         break;
                     case "DEL":
+                        idtutorial = Convert.ToInt32(Request["idtutorial"]);
+                        daoTutoriales.tutorialesDel(idtutorial);
                         break;
                 }
             }
